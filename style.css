@@ -1,0 +1,208 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  cursor: crosshair;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none; /* keep browser pan/pinch off the render */
+}
+
+body {
+  touch-action: manipulation;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#pathbar {
+  position: fixed;
+  left: 14px;
+  top: 10px;
+  z-index: 5;
+  pointer-events: none;
+  font-family: "Courier New", monospace;
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #8ef0d0;
+  text-shadow: 0 0 4px rgba(80, 255, 200, 0.6);
+}
+
+#hint {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+  z-index: 5;
+  pointer-events: none;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(140, 220, 195, 0.5);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Windows 98 style windows (rough sketch is fine)
+   ========================================================= */
+#windows {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.win98 {
+  position: absolute;
+  min-width: 330px;
+  max-width: 460px;
+  pointer-events: auto;
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
+  font-family: "Tahoma", "MS Sans Serif", "Segoe UI", sans-serif;
+  font-size: 12px;
+  color: #000;
+  user-select: none;
+}
+
+.win98 .titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  margin: 2px;
+  padding: 0 3px;
+  background: linear-gradient(to right, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: move;
+}
+.win98.inactive .titlebar {
+  background: linear-gradient(to right, #808080, #b5b5b5);
+}
+.win98 .titlebar .title {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.win98 .titlebar .btn {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+  color: #000;
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 12px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Tahoma", sans-serif;
+}
+.win98 .titlebar .btn:active {
+  border-top: 1px solid #404040;
+  border-left: 1px solid #404040;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.win98 .menubar {
+  display: flex;
+  gap: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+.win98 .menubar span { cursor: default; }
+.win98 .menubar span:hover { background: #000080; color: #fff; }
+
+.win98 .content {
+  margin: 2px 4px 4px 4px;
+  padding: 8px;
+  background: #ffffff;
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  min-height: 90px;
+  max-height: 300px;
+  overflow: auto;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.win98 .content.gray {
+  background: #c0c0c0;
+  font-family: "Tahoma", "MS Sans Serif", sans-serif;
+}
+
+.win98 .statusbar {
+  display: flex;
+  gap: 4px;
+  margin: 0 4px 4px 4px;
+}
+.win98 .statusbar .cell {
+  flex: 1;
+  padding: 2px 6px;
+  font-size: 11px;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* reboot panel sketch (movie control app vibe) */
+.reboot-box {
+  margin: 12px auto;
+  padding: 10px 16px;
+  width: 85%;
+  background: #dcdcdc;
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0 #555;
+  text-align: center;
+  font-family: "Arial Black", "Arial", sans-serif;
+}
+.reboot-box .big { font-size: 16px; font-style: italic; letter-spacing: 1px; }
+.reboot-box .small { font-size: 10px; margin-top: 4px; }
+
+.btnrow { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+.btnrow .b98 {
+  padding: 3px 14px;
+  background: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+  font-family: "Tahoma", sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+}
+.btnrow .b98:active {
+  border-top: 1px solid #404040;
+  border-left: 1px solid #404040;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.magic-word { color: #cc0000; font-weight: bold; }
