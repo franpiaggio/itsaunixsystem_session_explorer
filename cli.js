@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// npx itsaunixsystem — browse your Claude Code sessions as the Jurassic Park
+// npx jurassic-unix — browse your Claude Code sessions as the Jurassic Park
 // 3D file system. Run it from a project folder and the camera flies straight
 // to that project's sessions.
 "use strict";
@@ -21,7 +21,7 @@ start(port, process.cwd(), (url) => {
   spawn(opener, [url], { stdio: "ignore", detached: true }).on("error", () => {});
 }).on("error", (err) => {
   if (err.code === "EADDRINUSE") {
-    console.error(`Port ${port} is taken. Try: npx itsaunixsystem ${port + 1}`);
+    console.error(`Port ${port} is taken. Try: npx jurassic-unix ${port + 1}`);
     process.exit(1);
   }
   throw err;

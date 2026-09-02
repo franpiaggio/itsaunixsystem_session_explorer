@@ -15,7 +15,7 @@ scanned. Everything stays on `localhost`.
 ## Run it (one command)
 
 ```bash
-npx itsaunixsystem
+npx jurassic-unix
 ```
 
 Run it inside one of your project folders and the camera flies straight to
