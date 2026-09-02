@@ -1021,5 +1021,10 @@ async function boot() {
     nav.pitch = -0.28;
     setPath(PATH_BY_NODE.get(root.node));
   }
+  // launched from a project folder? fly straight to that project
+  if (tree.focus) {
+    const target = dirAnchors.find((a) => a.node.name === tree.focus);
+    if (target) flyToDir(target);
+  }
 }
 boot();

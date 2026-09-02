@@ -12,20 +12,18 @@ the session card — first prompt, date, turns, size — and a one-click
 Transcripts are never loaded into the page; only lightweight metadata is
 scanned. Everything stays on `localhost`.
 
-## Install & run (one command)
+## Run it (one command)
 
 ```bash
-git clone https://github.com/franpiaggio/itsaunixsystem_session_explorer && cd itsaunixsystem_session_explorer && python3 serve.py
+npx itsaunixsystem
 ```
 
-Already cloned? Just:
+Run it inside one of your project folders and the camera flies straight to
+that project's sessions. Opens `http://localhost:8931/` (pass a port as the
+only argument to change it). Zero dependencies — Node 16+ stdlib; Three.js
+and lil-gui come from CDN.
 
-```bash
-python3 serve.py
-```
-
-Opens your browser at `http://localhost:8931/`. Python 3.8+ stdlib only,
-no dependencies (Three.js and lil-gui come from CDN).
+Prefer Python? Clone the repo and `python3 serve.py` does the same.
 
 ## Controls
 

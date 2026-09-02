@@ -1,0 +1,12 @@
+{
+  "name": "itsaunixsystem",
+  "version": "1.0.0",
+  "description": "Browse your Claude Code sessions as the 3D UNIX file system from Jurassic Park (SGI fsn), with CRT shaders.",
+  "bin": { "itsaunixsystem": "cli.js" },
+  "files": ["cli.js", "server.js", "index.html", "main.js", "windows.js", "data.js", "style.css", "serve.py"],
+  "engines": { "node": ">=16" },
+  "repository": { "type": "git", "url": "git+https://github.com/franpiaggio/itsaunixsystem_session_explorer.git" },
+  "keywords": ["jurassic-park", "fsn", "unix", "threejs", "claude-code", "visualization"],
+  "author": "Francisco Piaggio",
+  "license": "MIT"
+}
