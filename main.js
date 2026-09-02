@@ -5,7 +5,7 @@
 import * as THREE from "three";
 import { FS_ROOT } from "./data.js";
 import GUI from "lil-gui";
-import { WinManager } from "./windows.js?v=26";
+import { WinManager } from "./windows.js?v=41";
 
 // ---------------- palette (sampled from movie stills) ----------------
 const COL = {
@@ -174,6 +174,8 @@ function fileGrid(n) {
 }
 
 function platformSize(node) {
+  // a dir with no files is a pure hub node — tiny pedestal, like the movie's "park"
+  if (!node.files.length) return { w: 6.5, d: 5.5, cols: 1, rows: 1 };
   const n = Math.max(node.files.length, 1);
   const { cols, rows } = fileGrid(n);
   return { w: cols * CELL + 4.5, d: rows * CELL + 6.5, cols, rows };
@@ -225,7 +227,8 @@ function buildDir(node, cx, cz, parentAnchor, path) {
   dirAnchors.push(anchor);
 
   // dir name on the black ground in front of the pedestal (clickable)
-  const dirLabel = makeGroundLabel(node.name.replace(/_/g, " "), COL.dirLabel, 3.4, { bold: true });
+  const dirName = node.name.length > 18 ? node.name.slice(0, 17) + "\u2026" : node.name;
+  const dirLabel = makeGroundLabel(dirName.replace(/_/g, " "), COL.dirLabel, 3.4, { bold: true, maxWidth: Math.max(w * 0.95, 12) });
   dirLabel.position.set(cx - w * 0.15, 0.03, cz + d / 2 + 3.6);
   dirLabel.userData = { type: "dir", node };
   scene.add(dirLabel);
@@ -281,8 +284,9 @@ function buildDir(node, cx, cz, parentAnchor, path) {
       scene.add(wire);
 
       // cyan wire label midway, rotated to run along the wire (movie: "Personnel")
-      const mid = curve.getPoint(0.55);
-      const wl = makeGroundLabel(child.name.replace(/_/g, " "), COL.wireLabel, 2.6);
+      const mid = curve.getPoint(0.8); // near the child so sibling labels fan apart
+      const wireName = child.name.length > 16 ? child.name.slice(0, 15) + "\u2026" : child.name;
+      const wl = makeGroundLabel(wireName.replace(/_/g, " "), COL.wireLabel, 2.2);
       const wdx = p2.x - p0.x, wdz = p2.z - p0.z;
       wl.rotation.z = Math.atan2(-wdz, wdx); // read along the wire, toward the child
       wl.position.set(mid.x + 1, 0.04, mid.z + 2);

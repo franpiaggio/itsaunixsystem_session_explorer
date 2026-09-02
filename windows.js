@@ -157,7 +157,7 @@ export class JPWin {
 }
 
 const TITLES = {
-  session: (w) => "SESSION — " + (w.file.meta.date || w.file.name),
+  session: (w) => "SESSION — " + w.file.name,
   map: (w) => `MAP — ${w.file.name}`,
   control: (w) => `CONTROL — ${w.file.name}`,
   log: (w) => `SYSLOG — ${w.file.name}`,
@@ -176,16 +176,14 @@ const DRAW = {
   // Claude Code session card: metadata + first prompt + resume command
   session(ctx) {
     const m = this.file.meta;
-    const project = m.cwd ? m.cwd.split("/").pop() : "?";
+    const project = (m.cwd ? m.cwd.split("/").pop() : "?").slice(0, 14);
     const cols = [
-      ["PROJECT", project], ["DATE", m.date || "?"],
-      ["TURNS", String(m.turns)], ["SIZE", m.mb + " MB"],
+      ["PROJECT", project, 16], ["DATE", m.date || "?", 128],
+      ["TURNS", String(m.turns), 262], ["SIZE", m.mb + " MB", 322],
     ];
-    let cx2 = 16;
-    for (const [k, v] of cols) {
+    for (const [k, v, cx2] of cols) {
       text(ctx, k, this.x + cx2, this.y + 44, SANSB(11), "#59647c");
       text(ctx, v, this.x + cx2, this.y + 60, MONOB(12), P.ink);
-      cx2 += 94;
     }
     // first prompt, wrapped, on paper
     insetBox(ctx, this.x + 12, this.y + 70, this.w - 24, 120, P.paper);
